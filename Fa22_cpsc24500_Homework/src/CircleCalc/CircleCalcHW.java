@@ -3,6 +3,7 @@
 package CircleCalc;
 
 import java.util.Random;
+//ended up using Math.random rather than Random x = new Random etc.
 
 public class CircleCalcHW {
 	
