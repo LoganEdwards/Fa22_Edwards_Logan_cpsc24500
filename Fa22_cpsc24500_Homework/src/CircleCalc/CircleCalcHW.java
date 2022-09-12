@@ -1,3 +1,5 @@
+//Logan Edwards
+
 package CircleCalc;
 
 import java.util.Random;
