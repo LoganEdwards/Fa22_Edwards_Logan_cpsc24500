@@ -39,7 +39,7 @@ public class FlooringHw {
 		totalPackages);
 		//convert to price
 		double price = totalPackages * 24.99;
-		System.out.println("Total price for "+ (int)totalPackages + " is: " + price + "$");
+		System.out.println("Total price for "+ (int)totalPackages + " packages is: " + price + "$");
 		
 	}
 	
