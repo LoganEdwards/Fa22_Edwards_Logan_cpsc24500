@@ -36,10 +36,14 @@ public class PageBuilder {
 		
 		System.out.println("Here is the code for your webpage:");
 		System.out.println("<html>");
-		System.out.println("<head><title>"+ name +"'s Web Page</title></head>");
+		System.out.printf("<head><title>%s's Web Page</title></head>\n", name);
 		System.out.println("<body>");
-		System.out.println("<h1>Welcome to "+ name + "'s Web Page</h1>");
-		System.out.println("<p>I am " + age + " years old and I live in " + location + ".</p>");
+		System.out.printf("<h1>Welcome to %s's Web Page</h1>\n", name);
+		System.out.printf("<p>I am %s years old or %s months and I live in %s.</p>\n", age, (age*12), location);
+		System.out.printf("<p>When I grow up I want to be a %s</p>\n", goals);
+		System.out.printf("<p>My two favorite integers are %s and %s, there quotient is: %.4s</p>\n", a,b, ((double)a/b));
+		System.out.println("</body>");
+		System.out.println("</html>");
 		
 	}
 
