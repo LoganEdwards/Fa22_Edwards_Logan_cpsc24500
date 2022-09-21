@@ -10,27 +10,27 @@ public class PageBuilder {
 		System.out.println("************************************************");
 		System.out.println("	   WEBPAGE BUILDER V1.0    			");
 		System.out.println("************************************************\n");
-		//setup header and 
+		//setup header and  explanation
 		System.out.println("This application will help you build a basic web page\n" +
 		"by asking you a series of questions. Just answer each question, and\nI'll " +
 		"popultate your new web page with your responses. \n");
 		
 		System.out.print("What is your name? ");
 		String name = input.nextLine();
-		//grab name store it in name
+		//grab String name store it in name
 		
 		System.out.print("How old are you? ");
 		int age = input.nextInt();
-		//grab age store it in age
+		//grab int age store it in age
 		
 		System.out.print("Where do you live? ");
 		blankSpace = input.nextLine();
 		String location = input.nextLine();
-		//grab location store it in location
+		//grab String location store it in location
 		
 		System.out.print("When you grow up, you want to be ... ");
 		String goals = input.nextLine();
-		//grab goals and store it
+		//grab String goals and store it
 		
 		System.out.print("What are your two favorite integers? ");
 		int a = input.nextInt();
