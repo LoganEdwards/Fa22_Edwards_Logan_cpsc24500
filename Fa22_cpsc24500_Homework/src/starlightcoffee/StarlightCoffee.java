@@ -80,14 +80,18 @@ public class StarlightCoffee {
 		total = pickCoffeeType(scan);
 		total *= pickSize(scan);
 		total += shotCount(scan);
+		//save the cost of the beverage and the discounts
 		double bevCost = total;
 		double discount = 0.00;
+		//if true then apply discount
 		if (memberCheck(scan)) { 
 			discount = total * 0.1;
 			total *= 0.9;
 		}
+		//apply taxes
 		double taxCost = total * tax;
 		total = total * (1+tax);
+		//apply tip
 		tip = bevCost * (tipCheck(scan)-1) ;
 		total += tip;
 		
