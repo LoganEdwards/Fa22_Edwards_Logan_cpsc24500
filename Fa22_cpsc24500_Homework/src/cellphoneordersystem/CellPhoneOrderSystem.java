@@ -7,6 +7,12 @@ public class CellPhoneOrderSystem {
 		
 		return 0;
 	}
+	public static int phoneNum(Scanner scan) {
+		System.out.println("How many phones would you like to purchase? ");
+		int num = scan.nextInt();
+		return num;
+		
+	}
 	public static String choice(Scanner scan) {
 		System.out.println("\nWhat add-on do you want?\n"
 				+ "[C]ase (49$)\n[S]creen protector (15$)\n"
@@ -19,10 +25,17 @@ public class CellPhoneOrderSystem {
 	public static void main(String[] args) {
 		String[] finalPhonePrint = {};
 		Scanner sc = new Scanner(System.in);
-		do {
-			choice(sc);	
-			
-		} while(choice(sc).equalsIgnoreCase("F") == false);
+		int numPhones = phoneNum(sc);
+		for(int i = 0; i<numPhones; i++) {
+			while(choice(sc).equalsIgnoreCase("F") == false) {
+				
+				
+				
+				
+			}
+			System.out.println("Phone order completed: \n\n\n");
+		} 
 	}
+	
 	
 }
