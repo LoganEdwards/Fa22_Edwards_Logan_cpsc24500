@@ -63,7 +63,7 @@ public class CellPhoneOrderSystem {
 	}
 	
 	public static int phoneNum(Scanner scan) {
-		System.out.println("How many phones would you like to purchase? ");
+		System.out.print("How many phones would you like to purchase? ");
 		int num = scan.nextInt();
 		return num;
 		
