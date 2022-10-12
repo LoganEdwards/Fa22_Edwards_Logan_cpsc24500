@@ -23,7 +23,7 @@ public class WNBAStats {
 	 * 			split it
 	 * 			parts[0] is name
 	 * 			parts[1] is wins
-	 * 			parts[2] is loss
+	 * 			parts[2] is losses
 	 * 			compute pct and gb
 	 * 			print the teams info
 	 */
