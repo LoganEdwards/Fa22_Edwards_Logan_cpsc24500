@@ -5,7 +5,7 @@ import java.io.File;
 public class WNBAStats {
 	
 	/*open file
-	 * read every line in file	
+	 *read every line in file	
 	 * 		if its a conference line,
 	 * 			set target to either eastern or western
 	 * 		else if not a blank line
