@@ -4,10 +4,9 @@ import java.io.File;
 
 public class WNBAStats {
 	//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
-	//open file
-	//read every line in file
-	//		if its a conference line,
-	/*
+	/*open file
+	 * read every line in file	
+	 * 		if its a conference line,
 	 * 			set target to either eastern or western
 	 * 		else if not a blank line
 	 * 			add line to the target location
