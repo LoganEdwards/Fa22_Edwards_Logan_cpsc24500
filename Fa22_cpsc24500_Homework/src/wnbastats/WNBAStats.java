@@ -1,6 +1,9 @@
 package wnbastats;
 
 import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class WNBAStats {
 	
@@ -28,13 +31,21 @@ public class WNBAStats {
 	 * 			print the teams info
 	 */
 	
+	public static void createMap(String name, ArrayList<Integer> winLoss) {
+		
+	}
+	
 	public static void main(String[] args) {
 		String[] eastern = new String[6];
 		String[] western = new String[6];
-		
+		String line;
+		String[] parts;
 		try { 
-			File wnbaInfo1 = new File("wnba.txt");
-			
+			Scanner scFile = new Scanner(new File("wnba.txt"));
+			while (scFile.hasNextLine()) {
+				line = scFile.nextLine().trim();
+				parts = line.split("\t");
+			}
 			
 		} catch (Exception ex ) {
 			
