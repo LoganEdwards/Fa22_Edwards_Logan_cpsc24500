@@ -1,28 +1,12 @@
 package wnbastats;
 
 import java.io.File;
-import java.util.LinkedHashMap;	//messed around with Hash map but it was easier to do without it
+//import java.util.LinkedHashMap;	messed around with Hash map but it was easier to do without it
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WNBAStats {
-	/*
-	 * do
-	 * 		show menu
-	 * 		if the want to see eastern
-	 * 			print eastern menu
-	 * 		if the want to see western
-	 * 			print western menu
-	 * 		
-	 * printing results 
-	 * 		for every line in that conference
-	 * 			split it
-	 * 			nameParts[0] is name
-	 * 			nameParts[1] is wins
-	 * 			nameParts[2] is losses
-	 * 			compute pct and gb
-	 * 			print the teams info
-	 */
+
 	public static String getFile() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("\nEnter the name of the file to read: ");
@@ -43,6 +27,14 @@ public class WNBAStats {
 		System.out.printf("%-25s%10s%10s%10s%7s","Team name", "Wins", "Losses","PCT", "GB");
 		for (int i = 0; i < pct.length; i++) {
 			System.out.printf("\n%-25s%10d%10d%10.3f%7s",names[i], wins[i], losses[i], pct[i], gb[i]);
+		}
+	}
+	
+	public static void printResultsGB(String[] names, int[] wins, int[] losses, double[] pct) {
+		System.out.println();
+		System.out.printf("%-25s%10s%10s%10s%7s","Team name", "Wins", "Losses","PCT", "GB");
+		for (int i = 0; i < pct.length; i++) {
+			System.out.printf("\n%-25s%10d%10d%10.3f%7s",names[i], wins[i], losses[i], pct[i]);
 		}
 	}
 	
@@ -68,13 +60,18 @@ public class WNBAStats {
 		return gbArr;
 	}
 	
+	public static void swapIndex(int[] arr, int i, int j) {
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+		
+	}
+	
 	public static int[] sortedCombinedList(int[] wins1, int[] wins2) {
 		//sorting the two conferences by the wins of their teams
-		int max;
-		int tempIndex;
-		int temp;
+		int minIndex = 0;
+		int index = 0;
 		int[] tempList = new int[wins1.length + wins2.length];
-		int[] finList = new int[tempList.length];
 		int[] indexes = new int[wins1.length + wins2.length];
 		int[] indexList = new int[wins1.length + wins2.length];
 		for(int i = 0; i < wins1.length + wins2.length; i++) {
@@ -87,30 +84,35 @@ public class WNBAStats {
 			}
 		}
 	
-		
 		//sort the wins and keep track of the indexes 
 		for (int x = 0; x < tempList.length; x++) {
-			max = tempList[x];
-			tempIndex = x;
-			//System.out.println(max + " " + tempIndex);
-			for (int z = x; z < tempList.length-1; z++) {
-				if(max < tempList[z + 1]) {
-					System.out.println(max + "		" + tempIndex + " Before");
-					max = tempList[z+1];
-					tempIndex = z+1;
-					System.out.println(max + "		" + tempIndex + " after");
+			minIndex = x;
+			for (int z = x + 1; z < tempList.length; z++) {
+				if (tempList[z] < tempList[minIndex]) { 
+					minIndex = z;
 				}
+				swapIndex(tempList, x, minIndex);
+				swapIndex(indexes,x , minIndex);
 			}
-			finList[x] = max;
-			indexList[x] = tempIndex;
 		}
+		//reverse the order of the indexes so its in decending order
+		for (int i = indexes.length - 1; i >= 0; i--) {
+			indexList[index] = indexes[i];
+			index++;
+		}
+		
 		return indexList;
 	}
 	
+	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		//LinkedHashMap<ArrayList<String>, ArrayList<Integer>> allTeamMap = new LinkedHashMap<ArrayList<String>, ArrayList<Integer>>();
 		ArrayList<String> allTeams = new ArrayList<String>();	
 		ArrayList<Integer> winLoss = new ArrayList<Integer>();
+		
+		//list of indexes for combined teams sorted by # of wins
+		int[] sortingList;
+		
 		//eastern names and win + loss
 		String[] eastern = new String[6];
 		int[] easternW = new int[6];
@@ -127,6 +129,21 @@ public class WNBAStats {
 		//GB for each team
 		String[] eastGB;
 		String[] westGB;
+		
+		
+		//initializing values for combined unsorted teams 
+		String[] combTeams = new String[12];
+		int[] combW = new int[12];
+		int[] combL = new int[12];
+		
+		//Sorted values for the combined teams using the indexes from sortingList
+		String[] sortedTeams = new String[12];
+		int[] sortedW = new int[12];
+		int[] sortedL = new int[12];
+		double[] sortedPCT = new double[12];
+		String[] sortedGB = new String[6];
+		
+		
 		
 		String line;
 		String[] nameParts;
@@ -206,25 +223,51 @@ public class WNBAStats {
 				if (curChoice == 1) {
 					eastPCT = calcPCT(easternW, easternL);
 					eastGB = calcGB(easternW);
-					System.out.println("\nPrinting eastern conference standings");
+					System.out.println("\nPrinting eastern conference standings: ");
 					printResults(eastern, easternW, easternL, eastPCT, eastGB);
 					
 				}
 				else if (curChoice == 2) {
 					westPCT = calcPCT(westernW, westernL);
 					westGB = calcGB(westernW);
-					System.out.println("\nPrinting eastern conference standings");
+					System.out.println("\nPrinting eastern conference standings: ");
 					printResults(western, westernW, westernL, westPCT, westGB);
 				}
 				else if (curChoice == 3) {
-					System.out.println("\nPrinting combined conference standings");
-					//printResults(allTeamPCT);
-					for (int x : sortedCombinedList(easternW, westernW)){System.out.println(x);}
+					//set all the variable to the unsorted versions of the combined teams
+					sortingList = sortedCombinedList(easternW, westernW);
+					for(int i = 0; i < eastern.length + western.length; i++) {
+						if (i < eastern.length) {
+							combTeams[i] = eastern[i];
+							combW[i] = easternW[i];
+							combL[i] = easternL[i];
+							
+						}
+						else {
+							combTeams[i] = western[i-6];
+							combW[i] = westernW[i-6];
+							combL[i] = easternL[i-6];
+							
+						}
+					}
+					//for loop to set each of the vaiables to their sorted versions
+					for(int j = 0; j < sortingList.length; j++) {
+						sortedTeams[j] = combTeams[sortingList[j]];
+						sortedW[j] = combW[sortingList[j]];
+						sortedL[j] = combL[sortingList[j]];
+					}
+					//use the calcGb and calcPCT methods for the sorted PCT and GB Lists
+					sortedPCT = calcPCT(sortedW, sortedL);
+					sortedGB = calcGB(sortedW);
+					
+					System.out.println("\nPrinting combined conference standings: ");
+					printResults(combTeams, sortedW, sortedL, sortedPCT, sortedGB);
 				}
 				curChoice = showMenu();
 		
 			}
 		}	catch (Exception ex) {
+			System.out.println(ex);
 			System.out.println("That is not a valid option");
 		}
 	}
