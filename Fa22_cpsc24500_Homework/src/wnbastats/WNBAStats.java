@@ -30,14 +30,6 @@ public class WNBAStats {
 		}
 	}
 	
-	public static void printResultsGB(String[] names, int[] wins, int[] losses, double[] pct) {
-		System.out.println();
-		System.out.printf("%-25s%10s%10s%10s%7s","Team name", "Wins", "Losses","PCT", "GB");
-		for (int i = 0; i < pct.length; i++) {
-			System.out.printf("\n%-25s%10d%10d%10.3f%7s",names[i], wins[i], losses[i], pct[i]);
-		}
-	}
-	
 	public static double[] calcPCT(int[] arrW, int[] arrL) {
 	//make new array to hold all values of wins / wins + loss
 		double[] calcArr = new double[arrW.length];
@@ -331,6 +323,9 @@ public class WNBAStats {
 		}	catch (Exception ex) {
 			System.out.println("That is not a valid option");
 		}
+		
+		System.out.println();
+		System.out.println("Thank you for using this program.");
 	}
 	
 }
