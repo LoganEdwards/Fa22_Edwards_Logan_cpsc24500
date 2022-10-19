@@ -38,49 +38,95 @@ public class WNBAStats {
 		return sc.nextInt();
 	}
 	
-	public static void printResults(String[] names, int[] wins, int[] losses, double[] pct, double[] gb) {
+	public static void printResults(String[] names, int[] wins, int[] losses, double[] pct, String[] gb) {
 		System.out.println();
-		System.out.printf("Team name %15s %5s %5s %5s","Wins", "Losses","PCT", "GB");
+		System.out.printf("%-25s%10s%10s%10s%7s","Team name", "Wins", "Losses","PCT", "GB");
 		for (int i = 0; i < pct.length; i++) {
-			System.out.printf("\n%-10s %15s %6s %6.3f %6.3f",names[i], wins[i], losses[i] ,pct[i], gb[i]);
+			System.out.printf("\n%-25s%10d%10d%10.3f%7s",names[i], wins[i], losses[i], pct[i], gb[i]);
 		}
 	}
 	
-	public static double[] calcPCT(int[] arr) {
-	//make new array to hold all values including 0s
-		double[] calcArr = new double[arr.length];
-		//make a final array to hold all #'s except 0s
-		double[] finArr = new double [arr.length/2];
+	public static double[] calcPCT(int[] arrW, int[] arrL) {
+	//make new array to hold all values of wins / wins + loss
+		double[] calcArr = new double[arrW.length];
 		//divide the wins by win + loss 
-		for (int i = 0; i < arr.length; i+=2) {		
-			calcArr[i] = arr[i] / (double)(arr[i+1] + arr[i]);	
+		for (int i = 0; i < arrW.length; i++) {		
+			calcArr[i] = arrW[i] / (double)(arrW[i] + arrL[i]);	
 		}
-		//the zeros are on the odd # index so we avoid those
-		for (int j = 0; j< finArr.length; j++) {
-			finArr[j] = calcArr[j*2];
-		}
-		return finArr;
+		return calcArr;
 	}
 	
-	public static double[] calcGB(int[] arr) {
-		double[] gbArr = new double[arr.length/2];
+	public static String[] calcGB(int[] arrOfWins) {
+		String[] gbArr = new String[arrOfWins.length];
+		for (int i = 0; i< gbArr.length; i++) {
+			if (i == 0) { gbArr[i] = "-"; }
+			else {
+				gbArr[i] = ((double)arrOfWins[0] - arrOfWins[i]) + ""; 
+			}
+		}
+		
 		return gbArr;
+	}
+	
+	public static int[] sortedCombinedList(int[] wins1, int[] wins2) {
+		//sorting the two conferences by the wins of their teams
+		int max;
+		int tempIndex;
+		int temp;
+		int[] tempList = new int[wins1.length + wins2.length];
+		int[] finList = new int[tempList.length];
+		int[] indexes = new int[wins1.length + wins2.length];
+		int[] indexList = new int[wins1.length + wins2.length];
+		for(int i = 0; i < wins1.length + wins2.length; i++) {
+			indexes[i] = i;
+			if (i < wins1.length) {
+				tempList[i] = wins1[i];
+			}
+			else {
+				tempList[i] = wins2[i-6];
+			}
+		}
+	
+		
+		//sort the wins and keep track of the indexes 
+		for (int x = 0; x < tempList.length; x++) {
+			max = tempList[x];
+			tempIndex = x;
+			//System.out.println(max + " " + tempIndex);
+			for (int z = x; z < tempList.length-1; z++) {
+				if(max < tempList[z + 1]) {
+					System.out.println(max + "		" + tempIndex + " Before");
+					max = tempList[z+1];
+					tempIndex = z+1;
+					System.out.println(max + "		" + tempIndex + " after");
+				}
+			}
+			finList[x] = max;
+			indexList[x] = tempIndex;
+		}
+		return indexList;
 	}
 	
 	public static void main(String[] args) {
 		//LinkedHashMap<ArrayList<String>, ArrayList<Integer>> allTeamMap = new LinkedHashMap<ArrayList<String>, ArrayList<Integer>>();
 		ArrayList<String> allTeams = new ArrayList<String>();	
 		ArrayList<Integer> winLoss = new ArrayList<Integer>();
-		//eastern names and winloss
+		//eastern names and win + loss
 		String[] eastern = new String[6];
-		int[] easternWL = new int[12];
-		//western names and winloss
+		int[] easternW = new int[6];
+		int[] easternL = new int[6];
+		//western names and win + loss
 		String[] western = new String[6];
-		int[] westernWL = new int[12];
+		int[] westernW = new int[6];
+		int[] westernL = new int[6];
 		
 		//pct for each team
 		double[] eastPCT;
 		double[] westPCT;
+		
+		//GB for each team
+		String[] eastGB;
+		String[] westGB;
 		
 		String line;
 		String[] nameParts;
@@ -121,17 +167,36 @@ public class WNBAStats {
 				//set the last 6 teams to western size= 12 - 6 then add 1,2,3 to keep the order right
 				western[i] = allTeams.get(allTeams.size()-western.length + i);
 			}
-			//set the individual teams win loss records 
-			for (int j = 0; j < easternWL.length; j++) {
-				easternWL[j] = winLoss.get(j);
-				westernWL[j] = winLoss.get(winLoss.size() - westernWL.length + j);
-			}
 			
+			//set the individual teams win + loss records first 12 #'s are eastern
+			for (int j = 0; j < easternW.length; j++) {
+				for (int z = 0; z < 2; z++) {	
+					if ((z % 2) == 0) {
+						//0 2 4 6 8 10 
+						easternW[j] = winLoss.get(j * 2);
+					}
+					else {
+						//1 3 5 7 9 11 
+						easternL[j] = winLoss.get((j *2) + z);
+					}
+				}
+			}
+			for (int x = 0;x < westernW.length; x++) {
+				for (int z = 12; z < 14; z++) {	
+					if ((z % 2) == 0) {
+						//12 14 16 18 20 22 
+						westernW[x] = winLoss.get((x * 2) + z);
+					}
+					else {
+						//13 15 17 19 21 23
+						westernL[x] = winLoss.get((x * 2 ) + z);
+					}
+				}	
+		}
 			
 			scFile.close();
 			
 		} catch (Exception ex ) {
-			System.out.println(ex);
 			System.out.println("A problem has happened");
 		}		
 		System.out.println("The teams have been read.");
@@ -139,26 +204,27 @@ public class WNBAStats {
 			int curChoice = showMenu();
 			while (curChoice != 4) {
 				if (curChoice == 1) {
-					eastPCT = calcPCT(easternWL);
-					//eastGB = calcGB(easternWL);
+					eastPCT = calcPCT(easternW, easternL);
+					eastGB = calcGB(easternW);
 					System.out.println("\nPrinting eastern conference standings");
-					printResults(eastern, easternWL, eastPCT, eastPCT);
+					printResults(eastern, easternW, easternL, eastPCT, eastGB);
 					
 				}
 				else if (curChoice == 2) {
-					westPCT = calcPCT(westernWL);
+					westPCT = calcPCT(westernW, westernL);
+					westGB = calcGB(westernW);
 					System.out.println("\nPrinting eastern conference standings");
-					printResults(western, westernWL, westPCT, westPCT);
+					printResults(western, westernW, westernL, westPCT, westGB);
 				}
 				else if (curChoice == 3) {
 					System.out.println("\nPrinting combined conference standings");
 					//printResults(allTeamPCT);
+					for (int x : sortedCombinedList(easternW, westernW)){System.out.println(x);}
 				}
 				curChoice = showMenu();
 		
 			}
 		}	catch (Exception ex) {
-			System.out.println(ex);
 			System.out.println("That is not a valid option");
 		}
 	}
