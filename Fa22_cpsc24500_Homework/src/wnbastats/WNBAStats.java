@@ -250,7 +250,7 @@ public class WNBAStats {
 							
 						}
 					}
-					//for loop to set each of the vaiables to their sorted versions
+					//for loop to set each of the variables to their sorted versions
 					for(int j = 0; j < sortingList.length; j++) {
 						sortedTeams[j] = combTeams[sortingList[j]];
 						sortedW[j] = combW[sortingList[j]];
