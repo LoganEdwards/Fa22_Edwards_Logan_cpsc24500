@@ -34,8 +34,7 @@ public class Author {
 	
 	public int getPrep() { return numPrep; }
 	public void setPrep(int preps) { numPrep = preps; }
-	
-	
+		
 	
 	
 }

@@ -20,7 +20,7 @@ public class App {
 		System.out.print("Enter the name of the file to read: ");
 		fName = sc.next();
 		WordFileReader file = new WordFileReader();
-		file.readFile(fName);
+		//file.readFile(fName);
 		
 		
 	}
