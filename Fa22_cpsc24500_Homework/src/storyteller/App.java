@@ -1,4 +1,6 @@
 package storyteller;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App {
 	/* which
@@ -12,7 +14,13 @@ public class App {
 	}
 	
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String fName;
 		printHeader();
+		System.out.print("Enter the name of the file to read: ");
+		fName = sc.next();
+		WordFileReader file = new WordFileReader();
+		file.readFile(fName);
 		
 		
 	}
