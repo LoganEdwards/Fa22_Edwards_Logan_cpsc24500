@@ -66,6 +66,21 @@ public class WNBAStats {
 		arr[j] = temp;
 		
 	}
+<<<<<<< HEAD
+=======
+	//overriding the method using same name with diff parameters
+	public static void swapIndex(double[] arr, int i, int j) {
+		double temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+	
+	public static void swapIndex(String[] arr, int i, int j) {
+		String temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+>>>>>>> 90c473d474e0ed6eaa6c64486c7cc0cd8c789d9a
 	
 	public static int[] sortedCombinedList(int[] wins1, int[] wins2) {
 		//sorting the two conferences by the wins of their teams
@@ -104,14 +119,61 @@ public class WNBAStats {
 		return indexList;
 	}
 	
+<<<<<<< HEAD
 	@SuppressWarnings("null")
+=======
+	public static int[] sortedPCTList(double[] pct1, double[] pct2) {
+		int minIndex = 0;
+		int index = 0;
+		double[] tempList = new double[pct1.length + pct2.length];
+		int[] indexes = new int[pct1.length + pct2.length];
+		int[] indexList = new int[pct1.length + pct2.length];
+		for(int i = 0; i < pct1.length + pct2.length; i++) {
+			indexes[i] = i;
+			if (i < pct1.length) {
+				tempList[i] = pct1[i];
+			}
+			else {
+				tempList[i] = pct2[i-6];
+			}
+		}
+	
+		//sort the wins and keep track of the indexes 
+		for (int x = 0; x < tempList.length; x++) {
+			minIndex = x;
+			for (int z = x + 1; z < tempList.length; z++) {
+				if (tempList[z] < tempList[minIndex]) { 
+					minIndex = z;
+				}
+				swapIndex(tempList, x, minIndex);
+				swapIndex(indexes,x , minIndex);
+			}
+		}
+		for (int i = indexes.length - 1; i >= 0; i--) {
+			indexList[index] = indexes[i];
+			index++;
+		}
+		
+		//sorting algorithm needs to swap indexes 5 and 6 to be complete idk why
+		swapIndex(indexList,5,6);
+		return indexList;
+	
+	}
+	
+>>>>>>> 90c473d474e0ed6eaa6c64486c7cc0cd8c789d9a
 	public static void main(String[] args) {
 		//LinkedHashMap<ArrayList<String>, ArrayList<Integer>> allTeamMap = new LinkedHashMap<ArrayList<String>, ArrayList<Integer>>();
 		ArrayList<String> allTeams = new ArrayList<String>();	
 		ArrayList<Integer> winLoss = new ArrayList<Integer>();
 		
+<<<<<<< HEAD
 		//list of indexes for combined teams sorted by # of wins
 		int[] sortingList;
+=======
+		//list of indexes for combined teams sorted by # of wins, pct, gb
+		int[] sortingList;
+		int[] pctSortingList;
+>>>>>>> 90c473d474e0ed6eaa6c64486c7cc0cd8c789d9a
 		
 		//eastern names and win + loss
 		String[] eastern = new String[6];
@@ -135,13 +197,22 @@ public class WNBAStats {
 		String[] combTeams = new String[12];
 		int[] combW = new int[12];
 		int[] combL = new int[12];
+<<<<<<< HEAD
+=======
+		double[] combPCT = new double[12];
+		String[] combGB = new String[12];
+>>>>>>> 90c473d474e0ed6eaa6c64486c7cc0cd8c789d9a
 		
 		//Sorted values for the combined teams using the indexes from sortingList
 		String[] sortedTeams = new String[12];
 		int[] sortedW = new int[12];
 		int[] sortedL = new int[12];
 		double[] sortedPCT = new double[12];
+<<<<<<< HEAD
 		String[] sortedGB = new String[6];
+=======
+		String[] sortedGB = new String[12];
+>>>>>>> 90c473d474e0ed6eaa6c64486c7cc0cd8c789d9a
 		
 		
 		
@@ -236,16 +307,26 @@ public class WNBAStats {
 				else if (curChoice == 3) {
 					//set all the variable to the unsorted versions of the combined teams
 					sortingList = sortedCombinedList(easternW, westernW);
+<<<<<<< HEAD
+=======
+					pctSortingList = sortedPCTList(calcPCT(easternW, easternL), calcPCT(westernW, westernL));
+>>>>>>> 90c473d474e0ed6eaa6c64486c7cc0cd8c789d9a
 					for(int i = 0; i < eastern.length + western.length; i++) {
 						if (i < eastern.length) {
 							combTeams[i] = eastern[i];
 							combW[i] = easternW[i];
 							combL[i] = easternL[i];
+<<<<<<< HEAD
+=======
+							combPCT[i] = calcPCT(easternW, easternL)[i];
+							combGB[i] = calcGB(easternW)[i];
+>>>>>>> 90c473d474e0ed6eaa6c64486c7cc0cd8c789d9a
 							
 						}
 						else {
 							combTeams[i] = western[i-6];
 							combW[i] = westernW[i-6];
+<<<<<<< HEAD
 							combL[i] = easternL[i-6];
 							
 						}
@@ -262,6 +343,31 @@ public class WNBAStats {
 					
 					System.out.println("\nPrinting combined conference standings: ");
 					printResults(combTeams, sortedW, sortedL, sortedPCT, sortedGB);
+=======
+							combL[i] = westernL[i-6];
+							combPCT[i] = calcPCT(westernW, westernL)[i-6];
+							combGB[i] = calcGB(westernW)[i-6];
+							
+						}
+					}
+					//for loop to set each of the vaiables to their sorted versions
+					for(int j = 0; j < sortingList.length; j++) {
+						sortedTeams[j] = combTeams[pctSortingList[j]];
+						sortedW[j] = combW[sortingList[j]];
+						sortedL[j] = combL[sortingList[j]];
+						sortedPCT[j] = combPCT[pctSortingList[j]];
+						sortedGB[j] = combGB[sortingList[j]];
+					}
+					
+					//sorting algorithm needs to swap indexes 5 and 6 to be complete idk why
+					swapIndex(sortedTeams, 3, 4);
+					swapIndex(sortedGB, 5, 6);
+					swapIndex(sortedW, 5, 6);
+					swapIndex(sortedL, 5, 6);
+					
+					System.out.println("\nPrinting combined conference standings: ");
+					printResults(sortedTeams, sortedW, sortedL, sortedPCT, sortedGB);
+>>>>>>> 90c473d474e0ed6eaa6c64486c7cc0cd8c789d9a
 				}
 				curChoice = showMenu();
 		
@@ -270,6 +376,9 @@ public class WNBAStats {
 			System.out.println(ex);
 			System.out.println("That is not a valid option");
 		}
+		
+		System.out.println();
+		System.out.println("Thank you for using this program.");
 	}
 	
 }
