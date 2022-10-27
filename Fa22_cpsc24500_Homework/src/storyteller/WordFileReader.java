@@ -6,14 +6,14 @@ import java.util.Scanner;
 import java.io.File;
 
 public class WordFileReader {
-	//a static function called readFile that reads the words into memory.	
-	//fix use of arrayList later, either split between words and type, or use all together
+	//a return function called readFile that reads the words into memory.	
+	//this method returns a linked HashMap that holds all the words with designated types, n, v, adverb ... etc.
 	public LinkedHashMap<String,ArrayList<String>> readFile(String fileName) {
 		try {
 			Scanner fsc = new Scanner(new File(fileName));
 			String line;
 			String[] tempParts;
-			String[] types = {"adj", "n", "adv", "v", "prep"};
+			//String[] types = {"adj", "n", "adv", "v", "prep"};
 			LinkedHashMap<String,ArrayList<String>> parts = new LinkedHashMap<String,ArrayList<String>>();
 			ArrayList<String> adj = new ArrayList<String>();
 			ArrayList<String> noun = new ArrayList<String>();
@@ -50,14 +50,8 @@ public class WordFileReader {
 			parts.put("adj", adj);
 			parts.put("n", noun);
 			parts.put("adv", adv);
-			parts.put("verb", verb);
+			parts.put("v", verb);
 			parts.put("prep", preps);
-			
-//			testing to make sure it has the right output
-//			ArrayList<String> x = parts.get("adv");
-//			for (String a : x) {
-//				System.out.println(a);
-//			}
 			
 			return parts;
 		}
