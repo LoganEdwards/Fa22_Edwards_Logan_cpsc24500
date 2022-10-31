@@ -58,7 +58,7 @@ public class Author {
 		return false;
 	}
 		
-	public void generateSentence(LinkedHashMap<String, ArrayList<String>> words, int numAdj, int numAdverb, int numPrep) {
+	public String generateSentence(LinkedHashMap<String, ArrayList<String>> words, int numAdj, int numAdverb, int numPrep) {
 		//generate a sentence while passing in a random index from each of the specified arrayLists ie random noun, random verb... etc.
 		
 		//The {<adjective>} <subject> <predicate> {<adverb>}{<preposition> the <object of preposition>}  ~Formula
@@ -67,7 +67,10 @@ public class Author {
 		//only initializing these now because they are used in both print statements but are sometimes left blank
 		String xAdj = "";
 		String xAdverb = "";
+		String preposition = "";
+		String objOfPrep = "";
 		Random rnd = new Random();
+		String finLine;
 		//making variables to get random indexes from arr lists to pass into the formatted print statement
 		String subject = words.get("n").get(rnd.nextInt(words.get("n").size())) + " "; 
 		String predicate = words.get("v").get(rnd.nextInt(words.get("v").size())) + " ";
@@ -79,24 +82,26 @@ public class Author {
 			xAdverb = words.get("adv").get(rnd.nextInt(words.get("adv").size())) + " ";
 		}
 		if (genChance(numPrep)) {
-			String preposition = words.get("prep").get(rnd.nextInt(words.get("prep").size())) + " ";
-			String objOfPrep = words.get("n").get(rnd.nextInt(words.get("n").size()));
+			preposition = words.get("prep").get(rnd.nextInt(words.get("prep").size())) + " ";
+			objOfPrep = words.get("n").get(rnd.nextInt(words.get("n").size()));
 			//if we do have a preposition then the formula will change so I have a blank return in this if statement to skip the second return statement
-			System.out.printf("\nThe %s%s%s%s%sthe %s",xAdj, subject, predicate, xAdverb, preposition, objOfPrep);
-			return;
+			finLine = String.format("\nThe %s%s%s%s%sthe %s",xAdj, subject, predicate, xAdverb, preposition, objOfPrep).trim() + ".";
+			return finLine;
 		}
 		
 		else {		
 		//different formula for sentence with no preposition
-		System.out.printf("\nThe %s%s%s%s",xAdj, subject, predicate, xAdverb);
+		return String.format("\nThe %s%s%s%s",xAdj, subject, predicate, xAdverb).trim() + ".";
 		}
 		
 	}
-	public void makeStory(LinkedHashMap<String, ArrayList<String>> words, int numAdj, int numAdverb, int numPrep) {
+	public String[] makeStory(LinkedHashMap<String, ArrayList<String>> words, int numAdj, int numAdverb, int numPrep) {
 		//use generate sentence to make a new random sentence for each line
+		String[] story = new String[numLines];
 		for (int i = 0; i < numLines;i++) {
-			generateSentence(words, numAdj, numAdverb, numPrep);
+			story[i]= generateSentence(words, numAdj, numAdverb, numPrep) + "\n";
 		}
+		return story;
 	}
 	
 	

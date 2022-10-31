@@ -37,6 +37,7 @@ public class App {
 		Scanner sc = new Scanner(System.in);
 		String fName;
 		String choice;
+		String[] story;
 		printHeader();
 		//Grab file name from user
 		System.out.print("Enter the name of the file to read: ");
@@ -44,7 +45,10 @@ public class App {
 		do { 
 			printOptions(author, sc);
 			System.out.println("Here it is: ");
-			author.makeStory(file.readFile(fName), author.getAdj(), author.getAdverb(), author.getPrep());
+			story = author.makeStory(file.readFile(fName), author.getAdj(), author.getAdverb(), author.getPrep());
+			for (String x : story)
+				System.out.print(x);
+			
 			System.out.print("\nWould you like to generate another story? y or n: ");
 			choice = sc.next();
 		} while (choice.equalsIgnoreCase("y"));
