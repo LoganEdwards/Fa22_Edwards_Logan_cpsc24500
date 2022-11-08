@@ -2,8 +2,8 @@ package menagerie;
 
 public class Dog extends Pet{
 
-	public Dog(String name, double weight, int age) {
-		super(name, weight, age);
+	public Dog(String name, int age, double weight) {
+		super(name, age, weight);
 		
 	}
 
@@ -12,6 +12,8 @@ public class Dog extends Pet{
 		return "Dog";
 	}
 	
-	
-	
+//	@Override
+//	public String toString() {
+//		return super.toString();	
+//	}
 }

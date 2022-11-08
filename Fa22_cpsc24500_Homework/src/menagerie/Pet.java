@@ -6,10 +6,10 @@ public abstract class Pet implements Comparable<Pet> {
 	private double weight;
 	private int age;
 	
-	public Pet(String n, double w, int a) {
+	public Pet(String n, int a, double w) {
 		setName(n);
-		setWeight(w);
 		setAge(a);
+		setWeight(w);
 	}
 	
 	public String getName() {
@@ -35,11 +35,11 @@ public abstract class Pet implements Comparable<Pet> {
 	
 	@Override
 	public String toString() {
-		return String.format("Name: %s, Weight: %s, Age: %s", name, weight, age);
+		return String.format("Name: %s, Age: %s, Weight: %s", name, age, weight);
 	}
 	@Override
 	public int compareTo(Pet other) {
-		//use Collections.sort
+		//use Collections.sort to sort the pets
 		return getName().compareTo(other.getName());
 	}
 	
