@@ -33,7 +33,7 @@ public class MenagerieTestFile {
 		
 		//Arr list to hold all of the pets that are created by the user
 		ArrayList<Pet> animals = new ArrayList<Pet>();
-		
+		FileMaker fm = new FileMaker();
 		printOptions();
 		curChoice = scan.nextInt();
 		while (curChoice != 7) {
@@ -53,6 +53,7 @@ public class MenagerieTestFile {
 					animals.add(new Fish(scan.next(), scan.nextInt(), scan.nextDouble()));
 				}				
 			}
+			
 			else if (curChoice == 2) {
 				//add a blank line then print each pet using their toString()
 				System.out.println();
@@ -60,7 +61,22 @@ public class MenagerieTestFile {
 					System.out.println(p.toString());
 				}
 			}
-		
+			
+			else if(curChoice == 3) {
+				fm.writeToFile(animals, "MenagerieTEST");
+			}
+			
+			else if(curChoice == 4) {
+				
+			}
+			
+			else if(curChoice == 5) {
+				
+			}
+			
+			else if(curChoice == 6) {
+				
+			}
 		printOptions();
 		curChoice =scan.nextInt();
 		}
