@@ -26,14 +26,16 @@ public class MenagerieTestFile {
 		Scanner scan = new Scanner(System.in);
 		int curChoice;
 		String tempAnimalType = "";
+		String fileName;
 		//Header
 		System.out.println("*************************************************");
-		System.out.println("       Menagerie V1.0: The Pet Simulator             ");
+		System.out.println("       Menagerie V1.0: The Pet Simulator         ");
 		System.out.println("*************************************************");
 		
 		//Arr list to hold all of the pets that are created by the user
 		ArrayList<Pet> animals = new ArrayList<Pet>();
-		FileMaker fm = new FileMaker();
+		PetWriter pWriter = new PetWriter();
+		PetReader pReader = new PetReader();
 		printOptions();
 		curChoice = scan.nextInt();
 		while (curChoice != 7) {
@@ -57,30 +59,54 @@ public class MenagerieTestFile {
 			else if (curChoice == 2) {
 				//add a blank line then print each pet using their toString()
 				System.out.println();
+				System.out.println("Here is your list of pets: ");
 				for (Pet p : animals) {
 					System.out.println(p.toString());
 				}
 			}
 			
 			else if(curChoice == 3) {
-				fm.writeToFile(animals, "MenagerieTEST");
+				System.out.print("Enter the name of the file: ");
+				fileName = scan.next();
+				pWriter.writeToFile(animals, fileName);
+				System.out.println(fileName +"\nThe pets were saved to file.");
 			}
 			
 			else if(curChoice == 4) {
-				
+				animals.clear();
+				System.out.print("Enter the name of the file to read from: ");
+				fileName = scan.next();
+				System.out.println("\nLoaded pets from file !");
+				for (Pet p : pReader.readFromFile(fileName)) {
+					animals.add(p);
+				}
 			}
 			
 			else if(curChoice == 5) {
-				
+				System.out.println("Here is a simulation of a day in the life of your pets: \n");
+				for (int i = 1; i < 25; i++) {
+					//loop from 1 - 24 for each hour of the day
+					System.out.println("Hour " + i);
+					System.out.println("-------");
+					for (Pet p : animals) {
+						//then loop through each animal and do their random task
+						System.out.println(p.act(p.getRand()));
+						}
+					System.out.println();
+				}
 			}
 			
 			else if(curChoice == 6) {
-				
+				animals.clear();
+				System.out.println();
+				System.out.println("List of pets cleared !");
 			}
+		
+		System.out.println();
 		printOptions();
 		curChoice =scan.nextInt();
 		}
-		
+		System.out.println("\nThank you for using Menagerie. We hope you had fun.");
 		
 	}
 }

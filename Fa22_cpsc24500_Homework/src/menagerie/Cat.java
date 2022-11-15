@@ -1,14 +1,87 @@
 package menagerie;
 
 public class Cat extends Pet{
-
-	public Cat(String n, int a, double w) {
-		super(n, a, w);
+	//cutoff var's for the dogs tasks CO = cut off
+	private int eatCO;
+	private int sleepCO;
+	private int attentCO;
+	private int randTaskCO;
+	
+	public Cat(String name, int age, double weight) {
+		super(name, age, weight);
+		//the 3 cutoff numbers will be used as percentages to do that task
+		setEatCO(15);
+		setSleepCO(40);
+		setAttentCO(20);
+		setRandTaskCO(25);
 	}
-
+	
+	public Cat(String name, int age, double weight, int eat, int sleep, int attent, int rand) {
+		super(name, age, weight, eat, sleep, attent);
+		setRandTaskCO(rand);
+	}
+	
+	public int getEatCO() {
+		return eatCO;
+	}
+	public void setEatCO(int eatCO) {
+		this.eatCO = eatCO;
+	}
+	public int getSleepCO() {
+		return sleepCO;
+	}
+	public void setSleepCO(int i) {
+		sleepCO = i;
+	}
+	public int getAttentCO() {
+		return attentCO;
+	}
+	public void setAttentCO(int attentCO) {
+		this.attentCO = attentCO;
+	}
+	
+	public int getRandTaskCO() {
+		return randTaskCO;
+	}
+	public void setRandTaskCO(int randTaskCO) {
+		this.randTaskCO = randTaskCO;
+	}
 	@Override
 	public String getType() {
 		return "Cat";
+	}
+	
+	@Override
+	public String toString() {
+		//prints out the Name: name, Age: age, and Weight: weight
+		return String.format("%s\t", getType()) + super.toString();	
+	}
+	
+	
+	@Override
+	public String act(int num) {
+		//checks if the num, which is a random num from the pet class, is within the percentage of the current task
+		if (num <= getEatCO()) {
+			return String.format("The %s, %s, had some food and catnip.", getType(), getName());
+		}
+		else if (num <= (getEatCO() + getSleepCO())){
+			return String.format("The %s, %s, was sleepy and took a nap.", getType(), getName()); 
+		}
+		else if (num <= (getEatCO() + getSleepCO() + getAttentCO())) {
+			return String.format("The %s, %s, stared at you for attention.", getType(), getName());	
+		}
+		else {
+			//now to get a random task I check if the number is divisible by different numbers instead of making a new random
+			if (num % 3 == 0) {
+				return String.format("The %s, %s, chased its tail.", getType(), getName());
+			}
+			else if (num % 2 == 0){
+				return String.format("The %s, %s, played with a ball of yarn.", getType(), getName());
+			}
+			else {
+				return String.format("The %s, %s, did nothing.", getType(), getName());
+			}
+		}
 	}
 	
 }
