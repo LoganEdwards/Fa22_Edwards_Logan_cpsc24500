@@ -1,6 +1,7 @@
 package menagerie;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class MenagerieTestFile {
@@ -60,6 +61,7 @@ public class MenagerieTestFile {
 				//add a blank line then print each pet using their toString()
 				System.out.println();
 				System.out.println("Here is your list of pets: ");
+				Collections.sort(animals);
 				for (Pet p : animals) {
 					System.out.println(p.toString());
 				}
