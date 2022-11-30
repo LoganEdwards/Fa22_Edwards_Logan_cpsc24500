@@ -43,4 +43,9 @@ public abstract class WrittenArtisticWork extends ArtisticWork {
     public String getSpecificInfoString() {
         return text;
     }
+    @Override
+    //I don't think I need this here because it is an abstract class but I will leave it in here anyways
+    public String getTabbedString() {
+    	return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s",getType(),getCreator(),getDate(),getTitle(),getDescription(),getLanguage(),getText());
+    }
 }

@@ -21,6 +21,9 @@ public class Comment implements Serializable{
     public String getContent() {
         return content;
     }
+    public String getType() {
+    	return "comment";
+    }
     public void setContent(String content) {
         this.content = content;
     }
@@ -38,4 +41,7 @@ public class Comment implements Serializable{
     public String toString() {
         return String.format("On %s, %s commented ...\n\t\"%s\"", dateTime, postedBy, content);
     }
+    public String getTabbedString() {
+		return String.format("%s\t%s\t%s\t%s",getType(),getPostedBy(),getDateTime(),getContent());
+	}
 }

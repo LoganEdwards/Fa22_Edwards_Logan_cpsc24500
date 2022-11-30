@@ -35,4 +35,8 @@ public class Poem extends WrittenArtisticWork {
     	//Take the specific info generated in Written Artistic Work + meter information
         return String.format("Meter: %s\n%s", meter, super.getSpecificInfoString());
     }
+    @Override
+    public String getTabbedString() {
+    	return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",getType(),getCreator(),getDate(),getTitle(),getDescription(),getLanguage(),getText(),getMeter());
+    }
 }

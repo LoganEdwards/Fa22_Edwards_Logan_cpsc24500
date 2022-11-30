@@ -32,4 +32,8 @@ public class ShortStory extends WrittenArtisticWork {
     public String getSpecificInfoString() {
         return String.format("Setting: %s\n%s", setting, super.getSpecificInfoString());
     }
+    @Override
+    public String getTabbedString() {
+    	return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",getType(),getCreator(),getDate(),getTitle(),getDescription(),getLanguage(),getText(),getSetting());
+    }
 }

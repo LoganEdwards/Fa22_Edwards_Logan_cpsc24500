@@ -47,4 +47,10 @@ public class Song extends RecordedArtisticWork {
     public String getSpecificInfoString() {
         return String.format("%d bpm, key of %s", bpm,key);
     }
+	@Override
+	public String getTabbedString() {
+		return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",
+				getType(),getCreator(),getDate(),getTitle(),getDescription(),getDuration(),getFileName(),getFileSize(),getBPM(),getKey());
+	}
+
 }

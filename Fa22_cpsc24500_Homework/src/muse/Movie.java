@@ -45,4 +45,8 @@ public class Movie extends RecordedArtisticWork {
     public String getSpecificInfoString() {
         return String.format("filmed with %s resolution at %d frames per second", resolution, frameRate);
     }
+    public String getTabbedString() {
+		return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",
+				getType(),getCreator(),getDate(),getTitle(),getDescription(),getDuration(),getFileName(),getFileSize(),getFrameRate(),getResolution());
+	}
 }

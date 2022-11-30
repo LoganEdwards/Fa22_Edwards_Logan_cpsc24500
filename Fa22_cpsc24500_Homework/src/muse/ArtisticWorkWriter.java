@@ -14,8 +14,12 @@ import java.util.HashMap;
 public class ArtisticWorkWriter {
 
 	public static boolean writeToText(ArrayList<ArtisticWork> works, String fName) {
-		try {			
-				
+		try {	
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(new File(fName))));
+			for(ArtisticWork aw : works) {
+				pw.println(aw.getTabbedString());
+			}
+			pw.close();
 			return true;
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -36,7 +40,9 @@ public class ArtisticWorkWriter {
 	}
 	public static boolean writeToXML(ArrayList<ArtisticWork> works, String fName) {
 		try {
-			
+			XMLEncoder enc = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(new File(fName))));
+			enc.writeObject(works);
+			enc.close();
 			return true;
 		} catch(Exception ex) {
 			ex.printStackTrace();
