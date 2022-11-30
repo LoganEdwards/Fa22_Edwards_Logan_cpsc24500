@@ -28,7 +28,7 @@ public class ArtisticWorkWriter {
 			pw.close();
 			return true;
 		} catch(Exception ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			return false;
 		}
 	}
@@ -40,7 +40,7 @@ public class ArtisticWorkWriter {
 			oos.close();
 			return true;
 		} catch(Exception ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			return false;
 		}
 	}
@@ -51,7 +51,7 @@ public class ArtisticWorkWriter {
 			enc.close();
 			return true;
 		} catch(Exception ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			return false;
 		}
 	}

@@ -163,17 +163,17 @@ public class App {
             	if (fType == 1) {
             		//read posts from Text
             		works = awReader.readFromText(fName);
-            		System.out.println("\nThe posts were successfully written.");
+            		System.out.println("\nThe posts were successfully read.");
             	}
             	else if (fType == 2) {
             		//read posts from Binary
             		works = awReader.readFromBinary(fName);
-            		System.out.println("\nThe posts were successfully written.");
+            		System.out.println("\nThe posts were successfully read.");
             	}
             	else if (fType == 3) {
             		//read posts from XML
             		works = awReader.readFromXML(fName);
-            		System.out.println("\nThe posts were successfully written.");
+            		System.out.println("\nThe posts were successfully read.");
             	}
             }
             else if (choice == 4) {
@@ -188,7 +188,7 @@ public class App {
             	if (fType == 1) {
             		//write posts to Text
             		if(awWriter.writeToText(works, fName)) {
-            			System.out.println("\nThe posts were read from the file.");
+            			System.out.println("\nThe posts were written to the file.");
             		}
             		else {
             			System.out.println("Something went wrong");
@@ -197,7 +197,7 @@ public class App {
             	else if (fType == 2) {
             		//write posts to Binary
             		if(awWriter.writeToBinary(works, fName)) {
-            			System.out.println("\nThe posts were read from the file.");
+            			System.out.println("\nThe posts were written to the file.");
             		}
             		else {
             			System.out.println("Something went wrong");
@@ -207,7 +207,7 @@ public class App {
             		//write posts to XML
             		if(awWriter.writeToXML(works, fName)) {
             			
-            			System.out.println("\nThe posts were read from the file.");
+            			System.out.println("\nThe posts were written to the file.");
             		}
             		else {
             			System.out.println("Something went wrong");
@@ -221,6 +221,7 @@ public class App {
             }
 			else if (choice == 6) {
             	works.clear();
+            	System.out.println("The posts were successfully cleared.");
             }
         } while (choice != 7);
         System.out.println();

@@ -75,7 +75,7 @@ public class ArtisticWorkReader {
 			}
 			return works;
 		} catch(Exception ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			return null;
 		}
 	}
@@ -88,7 +88,7 @@ public class ArtisticWorkReader {
 			ois.close();
 			return works;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			return null;
 		}
 	}
@@ -103,7 +103,7 @@ public class ArtisticWorkReader {
 			dec.close();
 			return works;
 		} catch(Exception ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			return null;
 		}
 		
