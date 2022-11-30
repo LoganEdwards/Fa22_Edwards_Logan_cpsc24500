@@ -13,6 +13,12 @@ import java.util.HashMap;
 
 public class ArtisticWorkWriter {
 
+	public static void writeToScreen(ArrayList<ArtisticWork> works) {
+		for (ArtisticWork aw : works) {
+			System.out.println(aw);
+		}
+	}
+	
 	public static boolean writeToText(ArrayList<ArtisticWork> works, String fName) {
 		try {	
 			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(new File(fName))));

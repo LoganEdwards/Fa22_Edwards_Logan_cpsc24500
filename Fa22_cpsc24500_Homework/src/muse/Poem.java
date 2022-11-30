@@ -1,5 +1,6 @@
 package muse;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class Poem extends WrittenArtisticWork {
@@ -37,6 +38,12 @@ public class Poem extends WrittenArtisticWork {
     }
     @Override
     public String getTabbedString() {
-    	return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",getType(),getCreator(),getDate(),getTitle(),getDescription(),getLanguage(),getText(),getMeter());
+    	String comments = "";
+    	ArrayList<Comment> comms = new ArrayList<Comment>();
+    	comms = getComments();
+    	for(Comment c : comms) {
+    		comments += String.format("\t%s\t%s\t%s",c.getPostedBy(),c.getDateTime(),c.getContent());
+    	}
+    	return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",getType(),getCreator(),getDate(),getTitle(),getDescription(),getLanguage(),getText(),getMeter()) + comments;
     }
 }

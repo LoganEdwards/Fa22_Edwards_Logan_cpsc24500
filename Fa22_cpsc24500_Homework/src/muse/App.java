@@ -94,8 +94,8 @@ public class App {
         ArtisticWork theWork;  // the work chosen to comment on
         int fType;
         String fName= "";
-        //ArtisticWorkReader awReader = new ArtisticWorkReader();
-        //ArtisticWorkWriter awWriter = new ArtisticWorkWriter();        
+        ArtisticWorkReader awReader = new ArtisticWorkReader();
+        ArtisticWorkWriter awWriter = new ArtisticWorkWriter();        
         do {
             showMainMenu();
             choice = sc.nextInt();
@@ -158,12 +158,36 @@ public class App {
             	System.out.println("3. XML");
             	System.out.print("Enter the nunmber of your choice: ");
             	fType = sc.nextInt();
+            	System.out.print("Enter the name of the file: ");
+        		fName = sc.next();
+            	if (fType == 1) {
+            		//read posts from Text
+            		works = awReader.readFromText(fName);
+            		System.out.println("\nThe posts were successfully written.");
+            	}
+            	else if (fType == 2) {
+            		//read posts from Binary
+            		works = awReader.readFromBinary(fName);
+            		System.out.println("\nThe posts were successfully written.");
+            	}
+            	else if (fType == 3) {
+            		//read posts from XML
+            		works = awReader.readFromXML(fName);
+            		System.out.println("\nThe posts were successfully written.");
+            	}
+            }
+            else if (choice == 4) {
+            	System.out.println("What kind of File?");
+            	System.out.println("1. Text");
+            	System.out.println("2. Binary");
+            	System.out.println("3. XML");
+            	System.out.print("Enter the nunmber of your choice: ");
+            	fType = sc.nextInt();
         		System.out.print("Enter the name of the file: ");
-        		//fName = sc.nextLine();
+        		fName = sc.next();
             	if (fType == 1) {
             		//write posts to Text
-            		fName = "awText.txt";
-            		if(ArtisticWorkWriter.writeToText(works, fName)) {
+            		if(awWriter.writeToText(works, fName)) {
             			System.out.println("\nThe posts were read from the file.");
             		}
             		else {
@@ -172,8 +196,7 @@ public class App {
             	}
             	else if (fType == 2) {
             		//write posts to Binary
-            		fName = "awBinary.bin";
-            		if(ArtisticWorkWriter.writeToBinary(works, fName)) {
+            		if(awWriter.writeToBinary(works, fName)) {
             			System.out.println("\nThe posts were read from the file.");
             		}
             		else {
@@ -182,8 +205,7 @@ public class App {
             	}
             	else if (fType == 3) {
             		//write posts to XML
-            		fName = "awXML.xml";
-            		if(ArtisticWorkWriter.writeToXML(works, fName)) {
+            		if(awWriter.writeToXML(works, fName)) {
             			
             			System.out.println("\nThe posts were read from the file.");
             		}
@@ -193,39 +215,9 @@ public class App {
             	}
             	
             }
-            else if (choice == 4) {
-            	System.out.println("What kind of File?");
-            	System.out.println("1. Text");
-            	System.out.println("2. Binary");
-            	System.out.println("3. XML");
-            	System.out.print("Enter the nunmber of your choice: ");
-            	fType = sc.nextInt();
-            	System.out.print("Enter the name of the file: ");
-        		fName = sc.next();
-            	if (fType == 1) {
-            		//read posts from Text
-            		
-            		works = ArtisticWorkReader.readFromText(fName);
-            		System.out.println("\nThe posts were successfully written.");
-            	}
-            	else if (fType == 2) {
-            		//read posts from Binary
-            		
-            		works = ArtisticWorkReader.readFromBinary(fName);
-            		System.out.println("\nThe posts were successfully written.");
-            	}
-            	else if (fType == 3) {
-            		//read posts from XML
-            		
-            		works = ArtisticWorkReader.readFromXML(fName);
-            		System.out.println("\nThe posts were successfully written.");
-            	}
-            }
 			else if (choice == 5) {
 				System.out.println("\nHere is a detailed list of all the posts:\n");
-            	for(ArtisticWork p : works) {
-            		System.out.println(p.getTabbedString());
-            	}
+            	awWriter.writeToScreen(works);
             }
 			else if (choice == 6) {
             	works.clear();

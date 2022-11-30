@@ -1,5 +1,6 @@
 package muse;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 public class Song extends RecordedArtisticWork {
     private int bpm;  // beats per minute
@@ -49,8 +50,14 @@ public class Song extends RecordedArtisticWork {
     }
 	@Override
 	public String getTabbedString() {
+		String comments = "";
+    	ArrayList<Comment> comms = new ArrayList<Comment>();
+    	comms = getComments();
+    	for(Comment c : comms) {
+    		comments += String.format("\t%s\t%s\t%s",c.getPostedBy(),c.getDateTime(),c.getContent());
+    	}
 		return String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",
-				getType(),getCreator(),getDate(),getTitle(),getDescription(),getDuration(),getFileName(),getFileSize(),getBPM(),getKey());
+				getType(),getCreator(),getDate(),getTitle(),getDescription(),getDuration(),getFileName(),getFileSize(),getBPM(),getKey()) + comments;
 	}
 
 }
