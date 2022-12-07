@@ -27,7 +27,6 @@ public class Question {
 		setChoice4(null);
 		setAnswer(ans);
 	}
-
 	public String getQuestion() {
 		return question;
 	}
@@ -66,6 +65,7 @@ public class Question {
 	}
 	@Override
 	public String toString() {
+		//print the neatly formatted string with answer choices
 		//change the format to a 3 question format 
 		if (choice4 == null) {
 			return String.format("%s\n\t\ta.\t%s\n\t\tb.\t%s\n\t\tc.\t%s", getQuestion(),getChoice1(),getChoice2(),getChoice3());

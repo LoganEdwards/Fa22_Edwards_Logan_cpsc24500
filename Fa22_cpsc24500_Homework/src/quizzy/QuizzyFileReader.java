@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class QuizzyFileReader {
 	
-	public ArrayList<Question> readFromText(String fName){
+	public ArrayList<Question> readFromText(File file){
 		ArrayList<Question> qs = new ArrayList<Question>();
 		String line = "";
 		String[] parts;
 		try {
-			Scanner fsc = new Scanner(new File(fName));
+			Scanner fsc = new Scanner(file);
 			while(fsc.hasNextLine()) {
 				line = fsc.nextLine();
 				parts = line.split("\t");
@@ -22,11 +22,13 @@ public class QuizzyFileReader {
 					qs.add(new Question(parts[0], parts[1],parts[2],parts[3], line.charAt(line.length()-1)));
 				}
 			}
+			fsc.close();
+			return qs;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			return null;
 		}
-		return qs;
+		
 	}
 	
 }
