@@ -68,10 +68,11 @@ public class Question {
 		//print the neatly formatted string with answer choices
 		//change the format to a 3 question format 
 		if (choice4 == null) {
-			return String.format("%s\n\t\ta.\t%s\n\t\tb.\t%s\n\t\tc.\t%s", getQuestion(),getChoice1(),getChoice2(),getChoice3());
+			return String.format("%s\n\ta.\t%s\n\tb.\t%s\n\tc.\t%s", getQuestion(),getChoice1(),getChoice2(),getChoice3());
+			
 		}
 		//format for 4 questions
-		return String.format("%s\n\t\ta.\t%s\n\t\tb.\t%s\n\t\tc.\t%s\n\t\td.\t%s", getQuestion(),getChoice1(),getChoice2(),getChoice3(),getChoice4());
+		return String.format("%s\n\ta.\t%s\n\tb.\t%s\n\tc.\t%s\n\td.\t%s", getQuestion(),getChoice1(),getChoice2(),getChoice3(),getChoice4());
 	}
 	
 	public String toTabbedString() {
